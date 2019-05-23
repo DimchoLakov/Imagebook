@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Imagebook.Data;
 using Imagebook.Data.Models;
@@ -24,8 +21,25 @@ namespace Imagebook.Web.Middlewares
         public async Task InvokeAsync(HttpContext context, IServiceProvider serviceProvider)
         {
             var dbContext = serviceProvider.GetRequiredService<ImagebookDbContext>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
+
+            await dbContext.Database.EnsureCreatedAsync();
+
+            if (await dbContext.Users.FirstOrDefaultAsync() == null)
+            {
+                await userManager.CreateAsync(new User()
+                {
+                    Email = "test_user@gmail.com",
+                    UserName = "test_username1",
+                    FirstName = "Jon",
+                    LastName = "Snow"
+                }, "TestPass1");
+            }
+
             if (await dbContext.Albums.CountAsync() < 5)
             {
+                var user = await dbContext.Users.FirstOrDefaultAsync();
+
                 for (int i = 0; i < 200; i++)
                 {
                     var album = new Album()
@@ -35,7 +49,8 @@ namespace Imagebook.Web.Middlewares
                         Location = new Location()
                         {
                             Name = $"Earth Number ${i.ToString()}"
-                        }
+                        },
+                        User = user
                     };
 
                     await dbContext.Albums.AddAsync(album);

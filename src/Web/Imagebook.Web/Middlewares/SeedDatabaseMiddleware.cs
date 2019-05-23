@@ -24,44 +24,24 @@ namespace Imagebook.Web.Middlewares
         public async Task InvokeAsync(HttpContext context, IServiceProvider serviceProvider)
         {
             var dbContext = serviceProvider.GetRequiredService<ImagebookDbContext>();
-            var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
-            using (dbContext)
+            if (await dbContext.Albums.CountAsync() < 5)
             {
-                await dbContext.Database.EnsureCreatedAsync();
-
-                if (await dbContext.Users.FirstOrDefaultAsync() == null)
+                for (int i = 0; i < 200; i++)
                 {
-                    await userManager.CreateAsync(new User()
+                    var album = new Album()
                     {
-                        Email = "test_user@gmail.com",
-                        UserName = "test_username1",
-                        FirstName = "Jon",
-                        LastName = "Snow"
-                    }, "TestPass1");
-                }
-
-                if (await dbContext.Albums.CountAsync() < 5)
-                {
-                    var user = await dbContext.Users.FirstOrDefaultAsync();
-
-                    for (int i = 0; i < 200; i++)
-                    {
-                        var album = new Album()
+                        Name = $"Test Album ${i.ToString()}",
+                        Description = $"Test Description ${i.ToString()}",
+                        Location = new Location()
                         {
-                            Name = $"Test Album ${i.ToString()}",
-                            Description = $"Test Description ${i.ToString()}",
-                            Location = new Location()
-                            {
-                                Name = $"Earth Number ${i.ToString()}"
-                            },
-                            User = user
-                        };
+                            Name = $"Earth Number ${i.ToString()}"
+                        }
+                    };
 
-                        await dbContext.Albums.AddAsync(album);
-                    }
-
-                    await dbContext.SaveChangesAsync();
+                    await dbContext.Albums.AddAsync(album);
                 }
+
+                await dbContext.SaveChangesAsync();
             }
 
             await _next(context);

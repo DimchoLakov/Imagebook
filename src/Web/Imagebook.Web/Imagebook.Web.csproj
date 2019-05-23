@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <UserSecretsId>aspnet-Imagebook-6F05F338-03D5-4B8D-8867-21340365D40B</UserSecretsId>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Automapper" Version="8.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.2.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\Imagebook.Data.Models\Imagebook.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\Imagebook.Data\Imagebook.Data.csproj" />
+    <ProjectReference Include="..\..\Imagebook.Services.Mapping\Imagebook.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Imagebook.Services\Imagebook.Services.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,179 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Lakov\\source\\repos\\Imagebook\\src\\Imagebook.Services.Mapping\\Imagebook.Services.Mapping.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Lakov\\source\\repos\\Imagebook\\src\\Data\\Imagebook.Data.Models\\Imagebook.Data.Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Lakov\\source\\repos\\Imagebook\\src\\Data\\Imagebook.Data.Models\\Imagebook.Data.Models.csproj",
+        "projectName": "Imagebook.Data.Models",
+        "projectPath": "C:\\Users\\Lakov\\source\\repos\\Imagebook\\src\\Data\\Imagebook.Data.Models\\Imagebook.Data.Models.csproj",
+        "packagesPath": "C:\\Users\\Lakov\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Lakov\\source\\repos\\Imagebook\\src\\Data\\Imagebook.Data.Models\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Lakov\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Users\\Lakov\\source\\repos\\Imagebook\\src\\Imagebook.Data.ViewModels\\Imagebook.Data.ViewModels.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Lakov\\source\\repos\\Imagebook\\src\\Imagebook.Data.ViewModels\\Imagebook.Data.ViewModels.csproj",
+        "projectName": "Imagebook.Data.ViewModels",
+        "projectPath": "C:\\Users\\Lakov\\source\\repos\\Imagebook\\src\\Imagebook.Data.ViewModels\\Imagebook.Data.ViewModels.csproj",
+        "packagesPath": "C:\\Users\\Lakov\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Lakov\\source\\repos\\Imagebook\\src\\Imagebook.Data.ViewModels\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Lakov\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Users\\Lakov\\source\\repos\\Imagebook\\src\\Imagebook.Services.Mapping\\Imagebook.Services.Mapping.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Lakov\\source\\repos\\Imagebook\\src\\Imagebook.Services.Mapping\\Imagebook.Services.Mapping.csproj",
+        "projectName": "Imagebook.Services.Mapping",
+        "projectPath": "C:\\Users\\Lakov\\source\\repos\\Imagebook\\src\\Imagebook.Services.Mapping\\Imagebook.Services.Mapping.csproj",
+        "packagesPath": "C:\\Users\\Lakov\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Lakov\\source\\repos\\Imagebook\\src\\Imagebook.Services.Mapping\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Lakov\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "C:\\Users\\Lakov\\source\\repos\\Imagebook\\src\\Data\\Imagebook.Data.Models\\Imagebook.Data.Models.csproj": {
+                "projectPath": "C:\\Users\\Lakov\\source\\repos\\Imagebook\\src\\Data\\Imagebook.Data.Models\\Imagebook.Data.Models.csproj"
+              },
+              "C:\\Users\\Lakov\\source\\repos\\Imagebook\\src\\Imagebook.Data.ViewModels\\Imagebook.Data.ViewModels.csproj": {
+                "projectPath": "C:\\Users\\Lakov\\source\\repos\\Imagebook\\src\\Imagebook.Data.ViewModels\\Imagebook.Data.ViewModels.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Automapper": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+C:\Users\Lakov\source\repos\Imagebook\src\Data\Imagebook.Data\bin\Debug\netcoreapp2.2\Imagebook.Data.deps.json
+C:\Users\Lakov\source\repos\Imagebook\src\Data\Imagebook.Data\bin\Debug\netcoreapp2.2\Imagebook.Data.dll
+C:\Users\Lakov\source\repos\Imagebook\src\Data\Imagebook.Data\obj\Debug\netcoreapp2.2\Imagebook.Data.csprojAssemblyReference.cache
+C:\Users\Lakov\source\repos\Imagebook\src\Data\Imagebook.Data\obj\Debug\netcoreapp2.2\Imagebook.Data.csproj.CoreCompileInputs.cache
+C:\Users\Lakov\source\repos\Imagebook\src\Data\Imagebook.Data\obj\Debug\netcoreapp2.2\Imagebook.Data.AssemblyInfoInputs.cache
+C:\Users\Lakov\source\repos\Imagebook\src\Data\Imagebook.Data\obj\Debug\netcoreapp2.2\Imagebook.Data.AssemblyInfo.cs
+C:\Users\Lakov\source\repos\Imagebook\src\Data\Imagebook.Data\bin\Debug\netcoreapp2.2\Imagebook.Data.runtimeconfig.json
+C:\Users\Lakov\source\repos\Imagebook\src\Data\Imagebook.Data\bin\Debug\netcoreapp2.2\Imagebook.Data.runtimeconfig.dev.json
+C:\Users\Lakov\source\repos\Imagebook\src\Data\Imagebook.Data\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Lakov\source\repos\Imagebook\src\Data\Imagebook.Data\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml
+C:\Users\Lakov\source\repos\Imagebook\src\Data\Imagebook.Data\obj\Debug\netcoreapp2.2\Imagebook.Data.csproj.CopyComplete
+C:\Users\Lakov\source\repos\Imagebook\src\Data\Imagebook.Data\bin\Debug\netcoreapp2.2\Imagebook.Data.Models.dll
+C:\Users\Lakov\source\repos\Imagebook\src\Data\Imagebook.Data\bin\Debug\netcoreapp2.2\Imagebook.Data.pdb
+C:\Users\Lakov\source\repos\Imagebook\src\Data\Imagebook.Data\bin\Debug\netcoreapp2.2\Imagebook.Data.Models.pdb
+C:\Users\Lakov\source\repos\Imagebook\src\Data\Imagebook.Data\obj\Debug\netcoreapp2.2\Imagebook.Data.dll
+C:\Users\Lakov\source\repos\Imagebook\src\Data\Imagebook.Data\obj\Debug\netcoreapp2.2\Imagebook.Data.pdb

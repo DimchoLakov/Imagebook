@@ -1,0 +1,9 @@
+C:\Users\Lakov\source\repos\Imagebook\src\Imagebook.Data.ViewModels\bin\Debug\netcoreapp2.2\Imagebook.Data.ViewModels.deps.json
+C:\Users\Lakov\source\repos\Imagebook\src\Imagebook.Data.ViewModels\bin\Debug\netcoreapp2.2\Imagebook.Data.ViewModels.dll
+C:\Users\Lakov\source\repos\Imagebook\src\Imagebook.Data.ViewModels\bin\Debug\netcoreapp2.2\Imagebook.Data.ViewModels.pdb
+C:\Users\Lakov\source\repos\Imagebook\src\Imagebook.Data.ViewModels\obj\Debug\netcoreapp2.2\Imagebook.Data.ViewModels.csprojAssemblyReference.cache
+C:\Users\Lakov\source\repos\Imagebook\src\Imagebook.Data.ViewModels\obj\Debug\netcoreapp2.2\Imagebook.Data.ViewModels.csproj.CoreCompileInputs.cache
+C:\Users\Lakov\source\repos\Imagebook\src\Imagebook.Data.ViewModels\obj\Debug\netcoreapp2.2\Imagebook.Data.ViewModels.AssemblyInfoInputs.cache
+C:\Users\Lakov\source\repos\Imagebook\src\Imagebook.Data.ViewModels\obj\Debug\netcoreapp2.2\Imagebook.Data.ViewModels.AssemblyInfo.cs
+C:\Users\Lakov\source\repos\Imagebook\src\Imagebook.Data.ViewModels\obj\Debug\netcoreapp2.2\Imagebook.Data.ViewModels.dll
+C:\Users\Lakov\source\repos\Imagebook\src\Imagebook.Data.ViewModels\obj\Debug\netcoreapp2.2\Imagebook.Data.ViewModels.pdb

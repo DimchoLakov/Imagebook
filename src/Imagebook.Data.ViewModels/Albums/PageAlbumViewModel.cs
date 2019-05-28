@@ -13,6 +13,14 @@ namespace Imagebook.Data.ViewModels.Albums
 
         public int TotalPages { get; set; }
 
+        public string Search { get; set; }
+
+        public string NameSortParam { get; set; }
+
+        public string DateSortParam { get; set; }
+
+        public string LocationSortParam { get; set; }
+
         public ICollection<IndexAlbumViewModel> IndexAlbumViewModels { get; set; }
     }
 }

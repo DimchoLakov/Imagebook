@@ -10,12 +10,14 @@ namespace Imagebook.Services.Contracts
 
         Task<AlbumEditDeleteDetailsViewModel> GetByIdAsync(string id);
 
-        Task<PageAlbumViewModel> GetPageAsync(int? currentPage);
+        Task<PageAlbumViewModel> GetPageAsync(string search, string sortOrder, int? currentPage);
 
         Task CreateAsync(CreateAlbumViewModel viewModel);
 
-        Task EditByIdAsync(string id);
+        Task EditAsync(AlbumEditDeleteDetailsViewModel viewModel);
 
-        Task DeleteByIdAsync(string id);
+        Task DeleteAsync(string id);
+
+        Task DeleteAsync(AlbumEditDeleteDetailsViewModel viewModel);
     }
 }

@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoMapper;
 using Imagebook.Data.Models;
-using Imagebook.Data.Repositories;
 using Imagebook.Data.Repositories.Contracts;
 using Imagebook.Data.ViewModels.Albums;
 using Imagebook.Services.Constants;
 using Imagebook.Services.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Imagebook.Services
 {
     public class AlbumsService : IAlbumsService
     {
-        private readonly IRepository<Album> _repository;
+        private readonly IAlbumsRepository _repository;
         private readonly IMapper _mapper;
 
-        public AlbumsService(IRepository<Album> repository, IMapper mapper)
+        public AlbumsService(IAlbumsRepository repository, IMapper mapper)
         {
             this._repository = repository;
             this._mapper = mapper;
@@ -25,7 +26,7 @@ namespace Imagebook.Services
 
         public async Task<ICollection<IndexAlbumViewModel>> GetAllAsync()
         {
-            var allAlbums = await this._repository.GetAllAsync();
+            var allAlbums = await this._repository.AllAsync();
             var albumsViewModels = this._mapper.Map<IEnumerable<Album>, IEnumerable<IndexAlbumViewModel>>(allAlbums).ToList();
 
             return albumsViewModels;
@@ -39,41 +40,101 @@ namespace Imagebook.Services
             return albumViewModel;
         }
 
-        public async Task<PageAlbumViewModel> GetPageAsync(int? currentPage = PageConstants.DefaultPageIndex)
+        public async Task<PageAlbumViewModel> GetPageAsync(string search, string sortOrder, int? currentPage = PageConstants.DefaultPageIndex)
         {
             var pageSize = PageConstants.PageSize;
             var skip = Convert.ToInt32(currentPage - 1) * pageSize;
             var take = pageSize;
 
-            var albums = await this._repository.GetPageAsync(skip, take);
+            // Get all albums as IQueryable
+            var allAlbums = await this._repository.AllAsync();
+
+            // Sort all ablums
+            switch (sortOrder)
+            {
+                case AlbumServiceConstants.OrderByNameInDescending:
+                    allAlbums = allAlbums.OrderByDescending(a => a.Name);
+                    break;
+                case AlbumServiceConstants.OrderByDateInDescending:
+                    allAlbums = allAlbums.OrderByDescending(a => a.CreatedOn);
+                    break;
+                case AlbumServiceConstants.OrderByDateInAscending:
+                    allAlbums = allAlbums.OrderBy(a => a.CreatedOn);
+                    break;
+                case AlbumServiceConstants.OrderByLocationInDescending:
+                    allAlbums = allAlbums.OrderByDescending(a => a.Location.Name);
+                    break;
+                case AlbumServiceConstants.OrderByLocationInAscending:
+                    allAlbums = allAlbums.OrderBy(a => a.Location.Name);
+                    break;
+                default:
+                    allAlbums = allAlbums.OrderBy(a => a.Name);
+                    break;
+            }
+
+            // Get albums for single page
+            var albums = await allAlbums.Skip(skip).Take(take).ToListAsync();
+            var totalPages = (int)Math.Ceiling(decimal.Divide(await allAlbums.CountAsync(), pageSize));
+
+            // filter
+            Expression<Func<Album, bool>> filter = a => a.Name.ToLower().Contains(search.ToLower());
+
+            // If Search string is not null, get filtered albums for single page
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                albums = await allAlbums.Where(filter).Skip(skip).Take(take).ToListAsync();
+                totalPages = (int)Math.Ceiling(decimal.Divide(await allAlbums.Where(filter).CountAsync(), pageSize));
+            }
+
             var albumViewModels = this._mapper.Map<IEnumerable<Album>, IEnumerable<IndexAlbumViewModel>>(albums).ToList();
-
-            var albumsCount = await this._repository.CountAsync();
-            var totalPages = (int)Math.Ceiling(decimal.Divide(albumsCount, pageSize));
-
-            var pageAlbumViewModel = new PageAlbumViewModel()
+            var pageAlbumViewModel = new PageAlbumViewModel
             {
                 CurrentPage = currentPage.GetValueOrDefault(),
                 TotalPages = totalPages,
-                IndexAlbumViewModels = albumViewModels
+                IndexAlbumViewModels = albumViewModels,
+                NameSortParam =
+                    string.IsNullOrWhiteSpace(sortOrder) ? AlbumServiceConstants.OrderByNameInDescending : AlbumServiceConstants.OrderByNameInAscending,
+                DateSortParam =
+                    sortOrder == AlbumServiceConstants.OrderByDateInAscending ? AlbumServiceConstants.OrderByDateInDescending : AlbumServiceConstants.OrderByDateInAscending,
+                LocationSortParam =
+                    sortOrder == AlbumServiceConstants.OrderByLocationInAscending ? AlbumServiceConstants.OrderByLocationInDescending : AlbumServiceConstants.OrderByLocationInAscending,
+                Search = search
             };
 
             return pageAlbumViewModel;
         }
 
-        public Task CreateAsync(CreateAlbumViewModel viewModel)
+        public async Task CreateAsync(CreateAlbumViewModel viewModel)
         {
-            return this._repository.SaveChangesAsync();
+            var album = this._mapper.Map<Album>(viewModel);
+
+            await this._repository.AddAsync(album);
+
+            await this._repository.SaveChangesAsync();
         }
 
-        public Task EditByIdAsync(string id)
+        public async Task EditAsync(AlbumEditDeleteDetailsViewModel viewModel)
         {
-            return this._repository.SaveChangesAsync();
+            var album = this._mapper.Map<Album>(viewModel);
+            this._repository.Update(album);
+
+            await this._repository.SaveChangesAsync();
         }
 
-        public Task DeleteByIdAsync(string id)
+        public async Task DeleteAsync(string id)
         {
-            return this._repository.SaveChangesAsync();
+            await this._repository.Delete(id);
+
+            await this._repository.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(AlbumEditDeleteDetailsViewModel viewModel)
+        {
+            var album = this._mapper.Map<Album>(viewModel);
+
+            this._repository.Delete(album);
+
+            await this._repository.SaveChangesAsync();
         }
     }
 }

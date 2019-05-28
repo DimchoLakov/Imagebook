@@ -50,10 +50,11 @@ namespace Imagebook.Web
 
             services.AddAuthentication();
 
-            services.AddScoped(typeof(IRepository<>), typeof(ImagebookDbRepository<>));
-            services.AddTransient<IAlbumsService, AlbumsService>();
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IAlbumsRepository, AlbumsRepository>();
+            services.AddScoped<IAlbumsService, AlbumsService>();
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             var mappingConfiguration = new MapperConfiguration(mc =>
             {

@@ -18,14 +18,9 @@ namespace Imagebook.Web.Controllers
 
         [Authorize(Roles = UserRoleConstants.AdminUser)]
         [HttpGet]
-        public async Task<IActionResult> All(int? currentPage = 1)
+        public async Task<IActionResult> All(string search, string sortOrder, int? currentPage = 1)
         {
-            if (!this.User.Identity.IsAuthenticated)
-            {
-                return this.LocalRedirect("/Identity/Account/Login");
-            }
-
-            var albums = await this._albumsService.GetPageAsync(currentPage);
+            var albums = await this._albumsService.GetPageAsync(search, sortOrder, currentPage);
 
             return this.View(albums);
         }

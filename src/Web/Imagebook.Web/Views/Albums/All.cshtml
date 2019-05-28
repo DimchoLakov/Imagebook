@@ -7,11 +7,18 @@
 }
 
 <h1>All</h1>
-<h1>@this.ViewBag.MyRole</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<div class="row mt-3 mb-3 ml-1">
+    <form asp-controller="Albums" asp-action="All" method="get">
+        <label class="font-weight-bold" asp-for="@Model.Search"></label>
+        <input type="text" asp-for="@Model.Search" />
+        <input type="submit" value="Search" />
+    </form>
+</div>
 
 <partial name="_PagingPartial" />
 
@@ -19,16 +26,16 @@
     <thead>
         <tr>
             <th>
-                Name
+                <a asp-controller="Albums" asp-action="All" asp-route-sortOrder="@Model.NameSortParam" asp-route-search="@Model.Search">Name</a>
             </th>
             <th>
-                Created On
+                <a asp-controller="Albums" asp-action="All" asp-route-sortOrder="@Model.DateSortParam" asp-route-search="@Model.Search">Created On</a>
+            </th>
+            <th>
+                <a asp-controller="Albums" asp-action="All" asp-route-sortOrder="@Model.LocationSortParam" asp-route-search="@Model.Search">Location</a>
             </th>
             <th>
                 Description
-            </th>
-            <th>
-                Location
             </th>
         </tr>
     </thead>
@@ -43,14 +50,14 @@
                     @item.CreatedOn
                 </td>
                 <td>
-                    @item.Description
-                </td>
-                <td>
                     @item.Location
                 </td>
                 <td>
+                    @item.Description
+                </td>
+                <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="Albums" asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>

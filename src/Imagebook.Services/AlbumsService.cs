@@ -75,13 +75,18 @@ namespace Imagebook.Services
             // Get albums for single page
             var albums = await allAlbums.Skip(skip).Take(take).ToListAsync();
             var totalPages = (int)Math.Ceiling(decimal.Divide(await allAlbums.CountAsync(), pageSize));
-
-            // filter
-            Expression<Func<Album, bool>> filter = a => a.Name.ToLower().Contains(search.ToLower());
-
+            
             // If Search string is not null, get filtered albums for single page
             if (!string.IsNullOrWhiteSpace(search))
             {
+                var searchToLower = search.ToLower();
+            
+                //filter
+                Expression<Func<Album, bool>> filter = a =>
+                    a.Name.ToLower().Contains(searchToLower) ||
+                    a.Location.Name.ToLower().Contains(searchToLower) ||
+                    a.Description.ToLower().Contains(searchToLower);
+
                 albums = await allAlbums.Where(filter).Skip(skip).Take(take).ToListAsync();
                 totalPages = (int)Math.Ceiling(decimal.Divide(await allAlbums.Where(filter).CountAsync(), pageSize));
             }

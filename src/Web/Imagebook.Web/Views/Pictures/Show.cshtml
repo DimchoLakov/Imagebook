@@ -1,0 +1,8 @@
+﻿@model PictureViewModel
+
+@{
+    ViewData["Title"] = "Show Picture";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<img src="@Model.Src" class="img-fluid" alt="@Model.Name">

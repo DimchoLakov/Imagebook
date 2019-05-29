@@ -22,11 +22,9 @@ namespace Imagebook.Data.Repositories.Contracts
         Task Delete(Expression<Func<TEntity, bool>> filter);
 
         Task<TEntity> GetByIdAsync(params object[] id);
-
-        Task<int> SaveChangesAsync();
-
+        
         Task<int> CountAsync();
 
-        Task<bool> EntityExists(string id);
+        Task<bool> EntityExistsAsync(string id);
     }
 }

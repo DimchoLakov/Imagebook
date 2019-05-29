@@ -61,17 +61,12 @@ namespace Imagebook.Data.Repositories
             return await this._dbSet.FindAsync(id);
         }
 
-        public async Task<int> SaveChangesAsync()
-        {
-            return await this._dbContext.SaveChangesAsync();
-        }
-
         public async Task<int> CountAsync()
         {
             return await this._dbSet.CountAsync();
         }
 
-        public async Task<bool> EntityExists(string id)
+        public async Task<bool> EntityExistsAsync(string id)
         {
             var entity = await this.GetByIdAsync(id);
 

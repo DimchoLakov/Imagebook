@@ -8,7 +8,7 @@ namespace Imagebook.Services.Contracts
     {
         Task<ICollection<IndexAlbumViewModel>> GetAllAsync();
 
-        Task<AlbumEditDeleteDetailsViewModel> GetByIdAsync(string id);
+        Task<AlbumEditDeleteDetailsViewModel> GetWithPicturesByIdAsync(string id);
 
         Task<PageAlbumViewModel> GetPageAsync(string search, string sortOrder, int? currentPage);
 

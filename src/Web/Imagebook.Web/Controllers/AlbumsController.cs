@@ -1,8 +1,20 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
+using Imagebook.Data;
+using Imagebook.Data.Models;
+using Imagebook.Data.UnitOfWork.Contracts;
+using Imagebook.Data.ViewModels.Albums;
+using Imagebook.Data.ViewModels.Pictures;
 using Imagebook.Services.Contracts;
 using Imagebook.Web.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SixLabors.ImageSharp;
 
 
 namespace Imagebook.Web.Controllers
@@ -29,7 +41,7 @@ namespace Imagebook.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
-            var album = await this._albumsService.GetByIdAsync(id);
+            var album = await this._albumsService.GetWithPicturesByIdAsync(id);
 
             return this.View(album);
         }

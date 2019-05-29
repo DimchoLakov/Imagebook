@@ -3,6 +3,8 @@ using Imagebook.Data;
 using Imagebook.Data.Models;
 using Imagebook.Data.Repositories;
 using Imagebook.Data.Repositories.Contracts;
+using Imagebook.Data.UnitOfWork;
+using Imagebook.Data.UnitOfWork.Contracts;
 using Imagebook.Services;
 using Imagebook.Services.Contracts;
 using Imagebook.Services.Mapping.Profiles;
@@ -50,19 +52,28 @@ namespace Imagebook.Web
 
             services.AddAuthentication();
 
+            // Repositories
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IAlbumsRepository, AlbumsRepository>();
+            services.AddScoped<IAlbumRepository, AlbumRepository>();
+            services.AddScoped<IPictureRepository, PictureRepository>();
+
+            // Services
             services.AddScoped<IAlbumsService, AlbumsService>();
+            services.AddScoped<IPicturesService, PicturesService>();
+
+            // Unit of Work
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             var mappingConfiguration = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new AlbumProfile());
+                mc.AddProfile(new PictureProfile());
             });
             IMapper mapper = mappingConfiguration.CreateMapper();
             services.AddSingleton(mapper);
-            
+
             services.AddMvc(options =>
                 {
                     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
@@ -107,6 +118,12 @@ namespace Imagebook.Web
                     name: "areas",
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
+
+                routes.MapRoute(
+                    name: "show picture",
+                    template: "pictures/{id}",
+                    defaults: new { controller = "Pictures", action = "Show" }
+                    );
             });
         }
     }

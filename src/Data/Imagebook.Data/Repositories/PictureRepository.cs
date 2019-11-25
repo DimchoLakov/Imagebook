@@ -13,8 +13,7 @@ namespace Imagebook.Data.Repositories
 
         public async Task<IQueryable<Picture>> AllByAlbumId(string albumId)
         {
-            var allPictures = await this.AllAsync();
-            return allPictures.Where(p => p.AlbumId == albumId);
+            return await this.AllAsync(x => x.AlbumId == albumId);
         }
     }
 }

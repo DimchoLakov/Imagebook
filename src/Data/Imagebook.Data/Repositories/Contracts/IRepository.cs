@@ -9,6 +9,8 @@ namespace Imagebook.Data.Repositories.Contracts
     public interface IRepository<TEntity>
         where TEntity : class
     {
+        Task<IQueryable<TEntity>> AllAsync(Expression<Func<TEntity, bool>> filter);
+
         Task<IQueryable<TEntity>> AllAsync();
 
         Task AddAsync(TEntity entity);

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Imagebook.Data.Repositories.Contracts;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Imagebook.Data.Repositories.Contracts;
-using Microsoft.EntityFrameworkCore;
 
 namespace Imagebook.Data.Repositories
 {
@@ -52,7 +51,7 @@ namespace Imagebook.Data.Repositories
 
         public async Task Delete(Expression<Func<TEntity, bool>> filter)
         {
-            var entities = await this._dbSet.Where(filter).ToListAsync();
+            var entities = await this.AllAsync(filter);
             this._dbSet.RemoveRange(entities);
         }
 
@@ -71,6 +70,11 @@ namespace Imagebook.Data.Repositories
             var entity = await this.GetByIdAsync(id);
 
             return entity != null;
+        }
+
+        public async Task<IQueryable<TEntity>> AllAsync(Expression<Func<TEntity, bool>> filter)
+        {
+            return await Task.Run(() => this._dbSet.Where(filter).AsQueryable());
         }
     }
 }

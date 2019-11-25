@@ -13,14 +13,16 @@
 </p>
 
 <div class="row mt-3 mb-3 ml-1">
-    <form asp-controller="Albums" asp-action="All" method="get">
-        <label class="font-weight-bold" asp-for="@Model.Search"></label>
-        <input type="text" asp-for="@Model.Search" />
-        <input type="submit" value="Search" />
+    <form class="col-sm-12" asp-controller="Albums" asp-action="All" method="get">
+        <div class="form-row">
+            <label class="col-sm-2 col-form-label" asp-for="@Model.Search"></label>
+            <input class="form-control col-sm-4" asp-for="@Model.Search" />
+            <button class="btn btn-primary col-sm-2" type="submit">Search</button>
+        </div>
     </form>
 </div>
 
-<partial name="_PagingPartial" />
+<partial name="_PagingPartial" model="Model" />
 
 <table class="table">
     <thead>
@@ -65,4 +67,4 @@
     </tbody>
 </table>
 
-<partial name="_PagingPartial" />
+<partial name="_PagingPartial" model="Model"/>

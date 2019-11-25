@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Imagebook.Web
 {
@@ -47,7 +48,7 @@ namespace Imagebook.Web
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ImagebookDbContext>()
-                .AddDefaultUI(UIFramework.Bootstrap4)
+                .AddDefaultUI()
                 .AddDefaultTokenProviders();
 
             services.AddAuthentication();
@@ -74,15 +75,23 @@ namespace Imagebook.Web
             IMapper mapper = mappingConfiguration.CreateMapper();
             services.AddSingleton(mapper);
 
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+
             services.AddMvc(options =>
                 {
                     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
                 })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -106,24 +115,18 @@ namespace Imagebook.Web
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            app.UseRouting();
+
+            app.UseCors();
+
             app.UseAuthentication();
+            app.UseAuthorization();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapRoute(
-                    name: "areas",
-                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                );
-
-                routes.MapRoute(
-                    name: "show picture",
-                    template: "pictures/{id}",
-                    defaults: new { controller = "Pictures", action = "Show" }
-                    );
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }
